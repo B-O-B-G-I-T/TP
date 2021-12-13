@@ -1,0 +1,16 @@
+{
+	"folders": [
+		{
+			"path": "../.."
+		},
+		{
+			"path": "../../../../../../../../.Trash/src"
+		}
+	],
+	"settings": {
+		"java.project.sourcePaths": [
+			"TP1_Forconi_Squaglia/src",
+			"TP2_Forconi_Squaglia/src"
+		]
+	}
+}

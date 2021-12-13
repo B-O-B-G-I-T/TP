@@ -1,4 +1,3 @@
-package EX1;
 import java.util.ArrayList;
 
 public class MonTableau implements EstComparable {

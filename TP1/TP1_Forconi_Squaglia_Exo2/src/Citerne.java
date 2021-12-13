@@ -1,23 +1,26 @@
-package EX2;
+package TP2_Forconi_Squaglia;
+
 import java.time.LocalDate;
 
 public class Citerne {
 
-    private static int id=0;
+    private static int id = 0;
     private int capacite;
     private LocalDate dateMiseService;
     private double volume;
+
     public enum Liquide {
         Eau(10),
         Vin(15),
         Huile(9);
 
         private final int temperature; // in degrees
+
         Liquide(int temperature) {
-            this.temperature=temperature;
+            this.temperature = temperature;
         }
 
-        private int getTemperature(){
+        private int getTemperature() {
             return temperature;
         }
     }
@@ -50,12 +53,14 @@ public class Citerne {
         //Liquide liquide = liquide;
     }
 
-    public boolean plusAncienne(Citerne c2){
+    public boolean plusAncienne(Citerne c2) {
         return this.dateMiseService.isBefore(c2.dateMiseService);
     }
 
     @Override
     public String toString() {
-        return "Citerne n°"+id+", %s, capacité : "+capacite+" m3, mise en service : "+dateMiseService+", volume occupé : "+volume;
+        return "Citerne n°" + id + ", %s, capacité : " + capacite + " m3, mise en service : " + dateMiseService
+                + ", volume occupé : " + volume;
     }
 }
+
