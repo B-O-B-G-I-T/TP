@@ -1,3 +1,4 @@
+package EX1;
 
 
 public class App {
@@ -8,7 +9,7 @@ public class App {
 
         MonTableau m1 = new MonTableau(a);
         MonTableau m2 = new MonTableau(b);
-        
+
         System.out.println(m1.compareA(m2));
 
     }
