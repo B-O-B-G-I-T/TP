@@ -20,6 +20,49 @@ public class CiterneSecurise extends Citerne{
         CiterneDeTropPlein = new Citerne(capaciteTropPlein, liquide);
     }
 
+    public void ajouterLiquide(Double quantiteAjoute, boolean enMetreCube, Liquide liquide) throws CapacityExceededException, InvalidLiquide{
+        if (enMetreCube == true) {
+
+            if (quantiteAjoute + volume > capacite) {
+                volume = capacite;
+                double futurVolume = quantiteAjoute - (capacite - volume);
+                if( futurVolume < CiterneDeTropPlein.capacite){
+                    CiterneDeTropPlein.volume = futurVolume;
+                }
+                else
+                    CiterneDeTropPlein.volume = CiterneDeTropPlein.capacite;
+                    throw new CapacityExceededException((quantiteAjoute - volume));
+            }
+            if (liquideCinterne == null) {
+                liquideCinterne = liquide;
+            } else if (liquideCinterne != liquide) {
+                throw new InvalidLiquide();
+            } else {
+                this.volume += quantiteAjoute;
+                this.nettoye = false;
+            }
+
+        } else {
+            if (quantiteAjoute + (volume / capacite) > 1) {
+                volume = capacite;
+                double futurVolume = quantiteAjoute - (volume - capacite);
+                if( futurVolume < CiterneDeTropPlein.capacite){
+                    CiterneDeTropPlein.volume = futurVolume;
+                }else
+     {
+         CiterneDeTropPlein.volume = CiterneDeTropPlein.capacite;
+         throw new CapacityExceededException((quantiteAjoute - volume));
+     }           
+                throw new CapacityExceededException((quantiteAjoute - volume));
+            }
+            if (liquideCinterne != liquide) {
+                throw new InvalidLiquide();
+            } else {
+                this.volume += quantiteAjoute * capacite;
+                this.nettoye = false;
+            }
+        }
+    }
     public String toString() {
         return super.toString() + " capacite cuve de trop plein: " + CiterneDeTropPlein.capacite +
                 ", volume cuve de trop plein: " + CiterneDeTropPlein.volume;

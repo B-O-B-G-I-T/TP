@@ -1,4 +1,6 @@
 
+import javax.sound.midi.Soundbank;
+
 import classe.*;
 
 public class TestCiterne {
@@ -30,7 +32,31 @@ public class TestCiterne {
             } catch (RemoveLiquidException e) {
                 e.printStackTrace();
             }
-            
+
+        } catch (MinCapacityExeception e) {
+            e.printStackTrace();
+        } catch (MaxException e) {
+            e.printStackTrace();
+        }
+        System.out.println("\nEssaie pour les citernes sécurisées");
+        try {
+            CiterneSecurise sc1 = new CiterneSecurise(300, Liquide.eau, 100);
+            CiterneSecurise sc2 = new CiterneSecurise(300, Liquide.eau, 100);
+
+            System.out.println("teste equalité citernes securisées");
+           System.out.println(sc1.equals(sc2));
+
+           try {
+               System.out.println("teste ajout eau");
+               System.out.println("avant" + sc1);
+               sc1.ajouterLiquide(350, true, Liquide.eau);
+               System.out.println("apres" + sc1);
+           } catch (CapacityExceededException e) {
+               e.printStackTrace();
+           } catch (InvalidLiquide e) {
+               e.printStackTrace();
+           }
+
         } catch (MinCapacityExeception e) {
             e.printStackTrace();
         } catch (MaxException e) {

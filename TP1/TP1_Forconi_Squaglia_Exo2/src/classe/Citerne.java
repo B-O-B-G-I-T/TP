@@ -51,33 +51,33 @@ public class Citerne {
         return nbrCiterne;
     }
 
-    public void ajouterLiquide(float quantiteAjoute, boolean enMetreCube, Liquide liquide)
+    public void ajouterLiquide(double ajouterLiquide, boolean enMetreCube, Liquide liquide)
             throws CapacityExceededException, InvalidLiquide {
 
         if (enMetreCube == true) {
 
-            if (quantiteAjoute > (capacite - volume)) {
+            if (ajouterLiquide + volume > capacite) {
                 volume = capacite;
-                throw new CapacityExceededException((quantiteAjoute - volume));
+                throw new CapacityExceededException((ajouterLiquide - volume));
             }
             if(liquideCinterne == null){
                 liquideCinterne = liquide;
             }else if (liquideCinterne != liquide) {
                 throw new InvalidLiquide();
             } else {
-                this.volume += quantiteAjoute;
+                this.volume += ajouterLiquide;
                 this.nettoye = false;
             }
 
         } else {
-                if (quantiteAjoute > (volume / capacite)) {
+                if (ajouterLiquide + (volume / capacite) > 1) {
                     volume = capacite;
-                    throw new CapacityExceededException((quantiteAjoute - volume));
+                    throw new CapacityExceededException((ajouterLiquide - volume));
                 }
                 if (liquideCinterne != liquide) {
                 throw new InvalidLiquide();
                 }else {
-                    this.volume += quantiteAjoute * capacite;
+                    this.volume += ajouterLiquide * capacite;
                     this.nettoye = false;
                 }
         }
