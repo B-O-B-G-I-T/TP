@@ -1,6 +1,4 @@
 
-import javax.sound.midi.Soundbank;
-
 import classe.*;
 
 public class TestCiterne {

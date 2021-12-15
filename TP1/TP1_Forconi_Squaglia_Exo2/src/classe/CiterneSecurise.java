@@ -64,12 +64,12 @@ public class CiterneSecurise extends Citerne{
         }
     }
 
-    public void changeCiterneDeTroplein(Citerne cit) throws InvalidLiquide, RemoveLiquidException {
+    public void changeCiterneDeTroplein(Citerne cit) throws RemoveLiquidException, InvalidSetLiquide {
 
 		if(!(cit.getLiquideCiterne()==this.getLiquideCiterne())) {
 			cit.enleverLiquide(cit.getCapacite());
 			cit.nettoyage();
-			cit.setLiquideCiterne(liquideCiterne);
+			cit.setLiquideCiterne(this.liquideCiterne);
 		}
 		else {
 			this.CiterneDeTropPlein=cit;
@@ -94,20 +94,17 @@ public class CiterneSecurise extends Citerne{
         return(check1 && check2);
     }
 
-    public Object clone() throws CloneNotSupportedException, InvalidLiquide{
+    public Object clone() throws CloneNotSupportedException{
 		CiterneSecurise c=null;
 		Citerne c2=null;
 		try {
 			c = (CiterneSecurise)super.clone();
 			c2=(Citerne)CiterneDeTropPlein.clone();
-
+            c.changeCiterneDeTroplein(c2);
 		} catch (CloneNotSupportedException e) {
 
 			e.printStackTrace();
-		}
-		try {
-			c.changeCiterneDeTroplein(c2);
-		} catch (RemoveLiquidException | InvalidSetLiquide e) {
+		}catch (RemoveLiquidException | InvalidSetLiquide e) {
 
 			e.printStackTrace();
 		}

@@ -2,7 +2,7 @@ package classe;
 
 import java.time.LocalDate;
 
-public class Citerne implements Cloneable{
+public class Citerne implements Cloneable {
 
     private static int nbrCiterne = 0;
     public int ID_CITERNE;
@@ -11,7 +11,6 @@ public class Citerne implements Cloneable{
     protected double volume;
     protected Liquide liquideCiterne;
     protected boolean nettoye;
-
 
     public Citerne(int capacite, Liquide liquide)
             throws MinCapacityExeception, MaxException {
@@ -59,20 +58,24 @@ public class Citerne implements Cloneable{
         return capacite;
     }
 
-    public void setLiquideCiterne(Liquide liquideCiterne) {
-        this.liquideCiterne = liquideCiterne;
+    public void setLiquideCiterne(Liquide liquideCiterne) throws InvalidSetLiquide {
+        if (!this.nettoye) {
+            throw new InvalidSetLiquide();
+        } else {
+            this.liquideCiterne = liquideCiterne;
+        }
     }
 
     public void ajouterLiquide(int ajouterLiquide, Liquide liquide)
-    throws CapacityExceededException, InvalidLiquide {
+            throws CapacityExceededException, InvalidLiquide {
 
         if (ajouterLiquide + volume > capacite) {
             volume = capacite;
             throw new CapacityExceededException((ajouterLiquide - volume));
         }
-        if(liquideCiterne == null){
+        if (liquideCiterne == null) {
             liquideCiterne = liquide;
-        }else if (liquideCiterne != liquide) {
+        } else if (liquideCiterne != liquide) {
             throw new InvalidLiquide();
         } else {
             this.volume += ajouterLiquide;
@@ -82,18 +85,18 @@ public class Citerne implements Cloneable{
     }
 
     public void ajouterLiquide(double ajouterLiquide, Liquide liquide)
-    throws CapacityExceededException, InvalidLiquide {
+            throws CapacityExceededException, InvalidLiquide {
 
         if (ajouterLiquide + (volume / capacite) > 1) {
             volume = capacite;
             throw new CapacityExceededException((ajouterLiquide - volume));
         }
         if (liquideCiterne != liquide) {
-        throw new InvalidLiquide();
-        }else {
+            throw new InvalidLiquide();
+        } else {
             this.volume += ajouterLiquide * capacite;
             this.nettoye = false;
-    }
+        }
 
     }
 
@@ -107,7 +110,7 @@ public class Citerne implements Cloneable{
         }
     }
 
-    public void enleverLiquide(double quantiteEnleve) throws RemoveLiquidException{
+    public void enleverLiquide(double quantiteEnleve) throws RemoveLiquidException {
 
         if (quantiteEnleve > volume / capacite) {
             volume = capacite;
@@ -145,19 +148,20 @@ public class Citerne implements Cloneable{
     }
 
     public Object clone() throws CloneNotSupportedException{
-		Citerne c=null;
-		try {
-			c = (Citerne)super.clone();
-		} catch (CloneNotSupportedException e) {
-			e.printStackTrace();
-		}
-		c.setLiquideCiterne(liquideCiterne);
-		try {
-			c.ajouterLiquide(capacite, liquideCiterne);
-		} catch (CapacityExceededException | InvalidLiquide e) {
-			e.printStackTrace();
-		}
-		return c;
-	}
+        Citerne c = null;
+        try {
+            c = (Citerne) super.clone();
+            c.setLiquideCiterne(liquideCiterne);
+            c.ajouterLiquide(capacite, liquideCiterne);
+
+        } catch (CloneNotSupportedException e) {
+            e.printStackTrace();
+        } catch (CapacityExceededException | InvalidLiquide e) {
+            e.printStackTrace();
+        } catch (InvalidSetLiquide e) {
+            e.printStackTrace();
+        }
+        return c;
+    }
 
 }
