@@ -2,14 +2,14 @@ package classe;
 
 import java.time.LocalDate;
 
-public class Citerne {
+public class Citerne implements Cloneable{
 
     private static int nbrCiterne = 0;
     public int ID_CITERNE;
     public int capacite;
     private LocalDate dateMiseService;
     protected double volume;
-    protected Liquide liquideCinterne;
+    protected Liquide liquideCiterne;
     protected boolean nettoye;
 
 
@@ -24,14 +24,14 @@ public class Citerne {
 
         this.capacite = capacite;
         this.dateMiseService = LocalDate.now();
-        this.liquideCinterne = null;
+        this.liquideCiterne = null;
         this.nettoye = false;
 
     }
 
-    public void netoyage() {
+    public void nettoyage() {
 
-        liquideCinterne = null;
+        liquideCiterne = null;
         nettoye = true;
 
     }
@@ -42,7 +42,7 @@ public class Citerne {
 
     @Override
     public String toString() {
-        return "Citerne n°" + nbrCiterne + ", type de liquide: " + liquideCinterne + ", capacité : " + capacite
+        return "Citerne n°" + nbrCiterne + ", type de liquide: " + liquideCiterne + ", capacité : " + capacite
                 + " m³, mise en service : " + dateMiseService
                 + ", volume occupé: " + volume + " m³";
     }
@@ -51,57 +51,70 @@ public class Citerne {
         return nbrCiterne;
     }
 
-    public void ajouterLiquide(double ajouterLiquide, boolean enMetreCube, Liquide liquide)
-            throws CapacityExceededException, InvalidLiquide {
+    public Liquide getLiquideCiterne() {
+        return liquideCiterne;
+    }
 
-        if (enMetreCube == true) {
+    public int getCapacite() {
+        return capacite;
+    }
 
-            if (ajouterLiquide + volume > capacite) {
-                volume = capacite;
-                throw new CapacityExceededException((ajouterLiquide - volume));
-            }
-            if(liquideCinterne == null){
-                liquideCinterne = liquide;
-            }else if (liquideCinterne != liquide) {
-                throw new InvalidLiquide();
-            } else {
-                this.volume += ajouterLiquide;
-                this.nettoye = false;
-            }
+    public void setLiquideCiterne(Liquide liquideCiterne) {
+        this.liquideCiterne = liquideCiterne;
+    }
 
+    public void ajouterLiquide(int ajouterLiquide, Liquide liquide)
+    throws CapacityExceededException, InvalidLiquide {
+
+        if (ajouterLiquide + volume > capacite) {
+            volume = capacite;
+            throw new CapacityExceededException((ajouterLiquide - volume));
+        }
+        if(liquideCiterne == null){
+            liquideCiterne = liquide;
+        }else if (liquideCiterne != liquide) {
+            throw new InvalidLiquide();
         } else {
-                if (ajouterLiquide + (volume / capacite) > 1) {
-                    volume = capacite;
-                    throw new CapacityExceededException((ajouterLiquide - volume));
-                }
-                if (liquideCinterne != liquide) {
-                throw new InvalidLiquide();
-                }else {
-                    this.volume += ajouterLiquide * capacite;
-                    this.nettoye = false;
-                }
+            this.volume += ajouterLiquide;
+            this.nettoye = false;
+        }
+
+    }
+
+    public void ajouterLiquide(double ajouterLiquide, Liquide liquide)
+    throws CapacityExceededException, InvalidLiquide {
+
+        if (ajouterLiquide + (volume / capacite) > 1) {
+            volume = capacite;
+            throw new CapacityExceededException((ajouterLiquide - volume));
+        }
+        if (liquideCiterne != liquide) {
+        throw new InvalidLiquide();
+        }else {
+            this.volume += ajouterLiquide * capacite;
+            this.nettoye = false;
+    }
+
+    }
+
+    public void enleverLiquide(int quantiteEnleve) throws RemoveLiquidException {
+
+        if (quantiteEnleve > volume) {
+            volume = 0;
+            throw new RemoveLiquidException(quantiteEnleve - volume);
+        } else {
+            this.volume -= quantiteEnleve;
         }
     }
 
-    public void enleverLiquide(float quantiteEnleve, boolean enMetreCube) throws RemoveLiquidException {
+    public void enleverLiquide(double quantiteEnleve) throws RemoveLiquidException{
 
-        if (enMetreCube == true) {
-            
-                if (quantiteEnleve > volume) {
-                    volume = 0;
-                    throw new RemoveLiquidException(quantiteEnleve - volume);
-                } else {
-                    this.volume -= quantiteEnleve;
-                }
+        if (quantiteEnleve > volume / capacite) {
+            volume = capacite;
+            throw new RemoveLiquidException(quantiteEnleve - volume / capacite);
         } else {
-                if (quantiteEnleve > volume / capacite) {
-                    volume = capacite;
-                    throw new RemoveLiquidException(quantiteEnleve - volume / capacite);
-                } else {
-                    this.volume += quantiteEnleve * capacite;
-                }
+            this.volume += quantiteEnleve * capacite;
         }
-
     }
 
     @Override
@@ -110,7 +123,7 @@ public class Citerne {
         return obj != null && obj instanceof Citerne
                 && ((Citerne) obj).capacite == this.capacite
                 && ((Citerne) obj).dateMiseService.equals(this.dateMiseService)
-                && ((Citerne) obj).liquideCinterne == this.liquideCinterne
+                && ((Citerne) obj).liquideCiterne == this.liquideCiterne
                 && ((Citerne) obj).volume == this.volume;
     }
 
@@ -130,4 +143,21 @@ public class Citerne {
         }
         return -2;
     }
+
+    public Object clone() throws CloneNotSupportedException{
+		Citerne c=null;
+		try {
+			c = (Citerne)super.clone();
+		} catch (CloneNotSupportedException e) {
+			e.printStackTrace();
+		}
+		c.setLiquideCiterne(liquideCiterne);
+		try {
+			c.ajouterLiquide(capacite, liquideCiterne);
+		} catch (CapacityExceededException | InvalidLiquide e) {
+			e.printStackTrace();
+		}
+		return c;
+	}
+
 }
