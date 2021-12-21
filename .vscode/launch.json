@@ -1,0 +1,38 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Launch Test",
+            "request": "launch",
+            "mainClass": "TP2_EXO1.Test",
+            "projectName": "TP_84568de7"
+        },
+        {
+            "type": "java",
+            "name": "Launch TestCiterne",
+            "request": "launch",
+            "mainClass": "TP1_EXO2.TestCiterne",
+            "projectName": "TP_84568de7"
+        },
+        {
+            "type": "java",
+            "name": "Launch Test",
+            "request": "launch",
+            "mainClass": "TP1_EXO1.Test",
+            "projectName": "TP_84568de7"
+        },
+        {
+            "type": "java",
+            "name": "Launch Current File",
+            "request": "launch",
+            "mainClass": "${file}"
+        },
+        {
+            "type": "java",
+            "name": "Launch Test",
+            "request": "launch",
+            "mainClass": "Test",
+            "projectName": "TP_84568de7"
+        }
+    ]
+}
