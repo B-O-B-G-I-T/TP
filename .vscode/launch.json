@@ -4,6 +4,14 @@
             "type": "java",
             "name": "Launch Test",
             "request": "launch",
+            "mainClass": "TP2_EXO2.Test",
+            "projectName": "TP_84568de7",
+            "args": "src/TP2_EXO2/dictionary.txt 5"
+        },
+        {
+            "type": "java",
+            "name": "Launch Test",
+            "request": "launch",
             "mainClass": "TP2_EXO1.Test",
             "projectName": "TP_84568de7"
         },
