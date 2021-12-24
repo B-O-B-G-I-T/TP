@@ -138,7 +138,8 @@ public class Personne implements Comparable<Personne>{
 	@Override
 	public int compareTo(Personne o) {
 		
-		int comp = 
+		int compAge = age - o.age;
+		if 
 		return 0;
 	}
 }
