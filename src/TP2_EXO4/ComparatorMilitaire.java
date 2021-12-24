@@ -9,7 +9,7 @@ public class ComparatorMilitaire implements Comparable<String>, Comparator<Strin
 
     @Override
     public int compareTo(String o) {
-        if
+        
         return 0;
     }
 
