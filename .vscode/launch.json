@@ -2,6 +2,35 @@
     "configurations": [
         {
             "type": "java",
+            "name": "Launch Comparaision",
+            "request": "launch",
+            "mainClass": "TP2_EXO4.Comparaision",
+            "projectName": "TP_84568de7",
+            "args": "cette chaine avec quelques autres toutes differentes"
+        },
+        {
+            "type": "java",
+            "name": "Launch TrieListV_2",
+            "request": "launch",
+            "mainClass": "TP2_EXO3.TrieListV_2",
+            "projectName": "TP_84568de7"
+        },
+        {
+            "type": "java",
+            "name": "Launch TrieListV_1",
+            "request": "launch",
+            "mainClass": "TP2_EXO3.TrieListV_1",
+            "projectName": "TP_84568de7"
+        },
+        {
+            "type": "java",
+            "name": "Launch TrieList",
+            "request": "launch",
+            "mainClass": "TP2_EXO3.TrieList",
+            "projectName": "TP_84568de7"
+        },
+        {
+            "type": "java",
             "name": "Launch Test",
             "request": "launch",
             "mainClass": "TP2_EXO2.Test",

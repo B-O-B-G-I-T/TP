@@ -39,6 +39,8 @@ public class Test {
             if (l.size() >= tailleMin)
                 System.out.println(l.size() + ":" + l);
         }
+
+        
     }
 
     private static String alphabetiser(String mot) {
