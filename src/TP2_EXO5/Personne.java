@@ -1,7 +1,6 @@
 package TP2_EXO5;
 
 import java.time.LocalDate;
-import java.util.*;
 
 
 public class Personne implements Comparable<Personne>{
@@ -19,15 +18,15 @@ public class Personne implements Comparable<Personne>{
 	 * Constructeur de Personne
 	 * @param leNom le nom de la personne
 	 * @param lePrenom le prénom de la personne
-	 * @param laDate la date de naissance de la personne
-	 * @param lAdresse l'adresse de la personne
+	 * @param i la date de naissance de la personne
+	 * @param string l'adresse de la personne
 	 */
-	public Personne(String leNom,String lePrenom, int age, LocalDate laDate, Adresse lAdresse){
+	public Personne(String leNom,String lePrenom, int ages, LocalDate naissance, Adresse ad){
 		nom = leNom.toUpperCase();
 		prenom=lePrenom;
-		age = age;
-		dateNaissance=laDate;
-		adresse=lAdresse;
+		age = ages;
+		dateNaissance=naissance;
+		adresse=ad;
 		nbrPersonnes++;
 	}
 
@@ -138,8 +137,15 @@ public class Personne implements Comparable<Personne>{
 	@Override
 	public int compareTo(Personne o) {
 		
-		int compAge = age - o.age;
-		if 
-		return 0;
+		int comp = age - o.age;
+
+		if(comp == 0){
+			comp= nom.compareTo(o.nom);
+			return comp;
+		}else if (comp == 0){
+			comp = prenom.compareTo(o.prenom);
+			return comp;
+		}
+			return comp;
 	}
 }

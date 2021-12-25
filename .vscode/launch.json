@@ -2,6 +2,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "Launch Test",
+            "request": "launch",
+            "mainClass": "TP2_EXO5.Test",
+            "projectName": "TP_84568de7"
+        },
+        {
+            "type": "java",
             "name": "Launch Comparaision",
             "request": "launch",
             "mainClass": "TP2_EXO4.Comparaision",
